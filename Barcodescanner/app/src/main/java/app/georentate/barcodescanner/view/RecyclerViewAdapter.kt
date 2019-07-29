@@ -34,6 +34,7 @@ class RecyclerViewAdapter(var resultList: ArrayList<String>): RecyclerView.Adapt
 
     class ResultViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private var resultText = view.result_text
+        private var deleteImageView = view.delete_code
 
         fun bind(result: String) {
             resultText?.setText(result)
@@ -52,6 +53,11 @@ class RecyclerViewAdapter(var resultList: ArrayList<String>): RecyclerView.Adapt
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
             })
+
+            deleteImageView.setOnClickListener {
+                resultList.removeAt(adapterPosition)
+                MainActivity.recyclerViewAdapter.updateResultList(resultList)
+            }
         }
     }
 }
